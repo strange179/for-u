@@ -117,6 +117,61 @@
       }
     }
 
+    @keyframes popUpFade {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.5);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.2);
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* Fireworks Animations */
+    @keyframes explode {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes lightboxEnter {
+      0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
     @keyframes spin {
       from {
         transform: rotate(0deg);
@@ -135,6 +190,15 @@
       box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.15);
     }
 
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     .animate-flame {
       animation: flicker 0.6s infinite alternate;
     }
@@ -149,6 +213,12 @@
 
     .animate-wiggle {
       animation: float 3s ease-in-out infinite;
+    }
+
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: #ec4899;
     }
   </style>
 </head>
@@ -180,7 +250,7 @@
     const Heart = (props) => <Icon {...props} path={<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />} />;
     const Gift = (props) => <Icon {...props} path={<><rect x="3" y="8" width="18" height="4" rx="1" /><path d="M12 8v13" /><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" /><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" /></>} />;
     const Music = (props) => <Icon {...props} path={<><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></>} />;
-    const Stars = (props) => <Icon {...props} path={<><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /><path d="M5 3v4" /><path d="M9 5H3" /></>} />;
+    const Stars = (props) => <Icon {...props} path={<><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 3Z" /><path d="M5 3v4" /><path d="M9 5H3" /></>} />;
     const Sparkles = (props) => <Icon {...props} path={<><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1-1.275-1.275L12 3Z" /></>} />;
     const Lock = (props) => <Icon {...props} path={<><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></>} />;
     const Unlock = (props) => <Icon {...props} path={<><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 9.9-1" /></>} />;
@@ -192,7 +262,8 @@
     const Mic = (props) => <Icon {...props} path={<><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" /></>} />;
     const Calendar = (props) => <Icon {...props} path={<><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></>} />;
     const Camera = (props) => <Icon {...props} path={<><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></>} />;
-
+    const Clock = (props) => <Icon {...props} path={<><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></>} />;
+    const ZoomIn = (props) => <Icon {...props} path={<><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" /></>} />;
 
     const BirthdayApp = () => {
       const [isOpened, setIsOpened] = useState(false);
@@ -210,36 +281,173 @@
       const [isPlaying, setIsPlaying] = useState(false);
       const audioRef = useRef(null);
 
-      // --- رابط الريكورد ---
-      const recordUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+      // --- NEW STATES ---
+      const [selectedImage, setSelectedImage] = useState(null);
+      const [clickEffects, setClickEffects] = useState([]);
+      const [typedTitle, setTypedTitle] = useState("");
+      const [typedMessage, setTypedMessage] = useState("");
 
-      // --- صور الذكريات ---
+      // Countdown States
+      const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      const [showFireworks, setShowFireworks] = useState(false);
+
+      // --- CONFIGURATION ---
+      const recordUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+      const targetDate = "2026-01-03T00:00:00";
+
+      // *** Testing Mode: Set this to true to see the effect immediately, set to false for real date ***
+      const isTestingMode = false;
+
+      const fullTitle = "عيد ميلاد سعيد يا ندى";
+      const fullMessage = "كل سنة وأنتي طيبة، وكل سنة وأنتي الأجمل.";
+
       const memories = [
         "https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=400&q=80",
         "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=400&q=80",
         "https://images.unsplash.com/photo-1464349153912-d04643ee5036?auto=format&fit=crop&w=400&q=80"
       ];
 
-      // --- الألغاز ---
       const riddles = [
         {
           id: 1,
           question: "شيء لك، ولكن الناس يستخدمونه أكثر منك.. فما هو؟",
-          answers: ["اسمك", "الاسم", "إسمي", "اسمي"]
+          answers: ["اسمك", "الاسم", "إسمي", "اسمي"],
+          wrongMessage: "خطأ! حاول تفكر في حاجة بتنادي بيها على نفسك."
         },
         {
           id: 2,
           question: "كلما أخذت منه كبر.. فما هو؟",
-          answers: ["الحفرة", "حفرة", "الحفره"]
+          answers: ["الحفرة", "حفرة", "الحفره"],
+          wrongMessage: "إجابة خاطئة. فكر في حاجة بنحفرها في الأرض."
         },
         {
           id: 3,
           question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"]
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماد بنستخدمه في المدرسة."
+        },
+        {
+          id: 4,
+          question: "شيء يكتب ولا يقرأ.. فما هو؟",
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
         }
       ];
 
-      // Fix: Generate background particles once to avoid re-render warnings
+      // --- FEATURE IMPLEMENTATIONS ---
+
+      const handleGlobalClick = (e) => {
+        if (e.target.closest('button') || e.target.closest('input')) return;
+
+        const newEffect = {
+          id: Date.now(),
+          x: e.clientX,
+          y: e.clientY,
+          icon: Math.random() > 0.5 ? <Heart size={20} fill="#F472B6" className="text-pink-400" /> : <Stars size={20} fill="#FBBF24" className="text-yellow-400" />
+        };
+
+        setClickEffects(prev => [...prev, newEffect]);
+
+        setTimeout(() => {
+          setClickEffects(prev => prev.filter(effect => effect.id !== newEffect.id));
+        }, 1000);
+      };
+
+      // --- SMART COUNTDOWN LOGIC ---
+      useEffect(() => {
+        const calculateTimeLeft = () => {
+          const difference = +new Date(targetDate) - +new Date();
+
+          // If date passed (or testing mode is on)
+          if (difference <= 0 || isTestingMode) {
+            return null; // Signal that time is up
+          }
+
+          return {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60)
+          };
+        };
+
+        const initialTime = calculateTimeLeft();
+
+        if (initialTime === null) {
+          // Time is already up! Start the "Fast Countdown" Effect
+          let fakeSeconds = 10; // Start from 10 fake seconds
+          let fakeMillis = 99;
+
+          const fastTimer = setInterval(() => {
+            fakeMillis -= 4; // Speed of countdown
+            if (fakeMillis < 0) {
+              fakeMillis = 99;
+              fakeSeconds -= 1;
+            }
+
+            if (fakeSeconds < 0) {
+              // Reached Zero!
+              clearInterval(fastTimer);
+              setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+              setShowFireworks(true); // Trigger Fireworks
+            } else {
+              // Show fake rapid countdown
+              setTimeLeft({
+                days: 0,
+                hours: 0,
+                minutes: 0,
+                seconds: fakeSeconds,
+                millis: fakeMillis // visual flair
+              });
+            }
+          }, 20); // Very fast updates
+
+          return () => clearInterval(fastTimer);
+        } else {
+          // Normal Countdown
+          setTimeLeft(initialTime);
+          const timer = setInterval(() => {
+            const t = calculateTimeLeft();
+            if (t) {
+              setTimeLeft(t);
+            } else {
+              clearInterval(timer);
+              setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+              setShowFireworks(true);
+            }
+          }, 1000);
+          return () => clearInterval(timer);
+        }
+      }, []);
+
+      useEffect(() => {
+        if (isOpened) {
+          let titleIndex = 0;
+          let msgIndex = 0;
+
+          const typeTitle = setInterval(() => {
+            if (titleIndex <= fullTitle.length) {
+              setTypedTitle(fullTitle.slice(0, titleIndex));
+              titleIndex++;
+            } else {
+              clearInterval(typeTitle);
+              const typeMsg = setInterval(() => {
+                if (msgIndex <= fullMessage.length) {
+                  setTypedMessage(fullMessage.slice(0, msgIndex));
+                  msgIndex++;
+                } else {
+                  clearInterval(typeMsg);
+                }
+              }, 50);
+            }
+          }, 100);
+
+          return () => {
+            clearInterval(typeTitle);
+          };
+        }
+      }, [isOpened]);
+
       const backgroundParticles = useMemo(() => {
         return Array.from({ length: 20 }).map((_, i) => ({
           id: i,
@@ -257,15 +465,15 @@
         const currentRiddle = riddles[currentLevel];
         if (currentRiddle.answers.some(a => a === answer.trim())) {
           setAnswer('');
-          setError(false);
+          setError('');
           if (currentLevel < riddles.length - 1) {
             setCurrentLevel(prev => prev + 1);
           } else {
             setGameCompleted(true);
           }
         } else {
-          setError(true);
-          setTimeout(() => setError(false), 500);
+          setError(currentRiddle.wrongMessage || "الإجابة غير صحيحة، حاولي تاني!");
+          setTimeout(() => setError(''), 2000);
         }
       };
 
@@ -287,7 +495,6 @@
         }
       }, [showGame]);
 
-      // Generate random balloons and confetti ONLY when opened
       useEffect(() => {
         if (isOpened) {
           const newBalloons = Array.from({ length: 20 }).map((_, i) => ({
@@ -311,7 +518,44 @@
       }, [isOpened]);
 
       return (
-        <div className="h-screen w-full bg-gradient-to-br from-pink-100 via-rose-200 to-pink-300 overflow-hidden relative font-sans" dir="rtl">
+        <div
+          className="h-screen w-full bg-gradient-to-br from-pink-100 via-rose-200 to-pink-300 overflow-hidden relative font-sans cursor-pointer"
+          dir="rtl"
+          onClick={handleGlobalClick}
+        >
+
+
+          {/* --- CLICK EFFECTS RENDERING --- */}
+          {clickEffects.map(effect => (
+            <div key={effect.id} className="absolute pointer-events-none z-50" style={{ left: effect.x, top: effect.y, animation: 'popUpFade 1s ease-out forwards' }}>
+              {effect.icon}
+            </div>
+          ))}
+
+          {/* --- FIREWORKS OVERLAY --- */}
+          {showFireworks && (
+            <div className="absolute inset-0 pointer-events-none z-40 overflow-hidden">
+              {/* Generate multiple bursts */}
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="absolute" style={{
+                  left: `${20 + Math.random() * 60}%`,
+                  top: `${20 + Math.random() * 40}%`,
+                  animation: `explode 1s ease-out infinite ${Math.random()}s`
+                }}>
+                  <div className="relative">
+                    {[...Array(8)].map((_, j) => (
+                      <div key={j} className="absolute w-2 h-16 origin-bottom rounded-full"
+                        style={{
+                          backgroundColor: ['#F472B6', '#FBBF24', '#34D399', '#60A5FA'][Math.floor(Math.random() * 4)],
+                          transform: `rotate(${j * 45}deg) translateY(-20px)`,
+                          opacity: 0.8
+                        }}></div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Background Floating Particles (Fixed Layer) */}
           <div className="absolute inset-0 pointer-events-none z-0">
@@ -333,29 +577,50 @@
             className={`w-full h-[200vh] transition-transform duration-[1500ms] ease-in-out will-change-transform ${isOpened ? '-translate-y-[100vh]' : 'translate-y-0'}`}
           >
 
-            {/* === SECTION 1: INTRO === */}
+            {/* === SECTION 1: INTRO (With Countdown) === */}
             <div className="h-[100vh] w-full flex items-center justify-center p-4 relative">
-              <div className="glass-card p-10 rounded-3xl text-center max-w-md w-full transform hover:scale-105 transition-transform duration-500">
+              <div className="glass-card p-8 md:p-10 rounded-3xl text-center max-w-md w-full transform hover:scale-105 transition-transform duration-500">
                 <div className="mb-6 flex justify-center">
-                  <div className="p-4 bg-pink-100 rounded-full text-pink-500 shadow-xl ring-4 ring-pink-50">
-                    <Gift size={48} className="animate-wiggle" />
+                  <div className={`p-4 bg-pink-100 rounded-full text-pink-500 shadow-xl ring-4 ring-pink-50 ${showFireworks ? 'animate-bounce' : 'animate-wiggle'}`}>
+                    {showFireworks ? <Sparkles size={48} /> : <Gift size={48} />}
                   </div>
                 </div>
 
-                <h1 className="text-3xl md:text-5xl font-extrabold text-pink-600 mb-4 tracking-wide">مفاجأة خاصة</h1>
+                <h1 className="text-3xl md:text-5xl font-extrabold text-pink-600 mb-4 tracking-wide">
+                  {showFireworks ? "حان وقت الاحتفال!" : "مفاجأة خاصة"}
+                </h1>
 
-                <div className="flex items-center justify-center gap-2 text-pink-500 mb-6 font-bold bg-white/40 py-2 px-4 rounded-full w-fit mx-auto">
-                  <Calendar size={18} />
-                  <span>3 / 1 / 2026</span>
+                {/* COUNTDOWN TIMER */}
+                <div className="mb-8">
+                  <div className="flex items-center justify-center gap-2 text-pink-500 mb-3 font-bold bg-white/40 py-1 px-4 rounded-full w-fit mx-auto text-sm">
+                    <Calendar size={16} /> <span>3 / 1 / 2026</span>
+                  </div>
+
+                  <div className="flex justify-center gap-3 text-center" dir="ltr">
+                    {[
+                      { label: 'Days', value: timeLeft.days },
+                      { label: 'Hours', value: timeLeft.hours },
+                      { label: 'Min', value: timeLeft.minutes },
+                      { label: 'Sec', value: timeLeft.seconds }
+                    ].map((item, idx) => (
+                      <div key={idx} className={`bg-white/50 p-2 rounded-lg min-w-[60px] shadow-sm border border-pink-100 transition-all ${showFireworks ? 'scale-110 bg-yellow-100 border-yellow-300' : ''}`}>
+                        <div className={`text-xl font-bold ${item.value === 0 && showFireworks ? 'text-green-600' : 'text-pink-600'}`}>
+                          {item.value < 10 ? `0${item.value}` : item.value}
+                        </div>
+                        <div className="text-[10px] text-pink-400 font-bold uppercase">{item.label}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                <p className="text-pink-800 mb-8 text-xl font-medium">
-                  هناك رسالة تنتظر أجمل شخص اليوم...
+                <p className="text-pink-800 mb-8 text-lg font-medium">
+                  {showFireworks ? "أسرعي وافتحي هديتك الآن! 👇" : "هناك رسالة تنتظر أجمل شخص اليوم..."}
                 </p>
 
                 <button
-                  onClick={() => setIsOpened(true)}
-                  className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xl shadow-lg hover:shadow-pink-500/50 transition-all active:scale-95 animate-[pulse-glow_2s_infinite]"
+                  onClick={(e) => { e.stopPropagation(); setIsOpened(true); }}
+                  className={`group relative px-8 py-4 rounded-full bg-gradient-to-r text-white font-bold text-xl shadow-lg transition-all active:scale-95 animate-[pulse-glow_2s_infinite]
+                        ${showFireworks ? 'from-yellow-400 to-orange-500 hover:shadow-orange-500/50' : 'from-pink-500 to-rose-500 hover:shadow-pink-500/50'}`}
                 >
                   <span className="flex items-center gap-3">
                     اضغطي هنا يا ندى
@@ -367,14 +632,13 @@
 
             {/* === SECTION 2: CELEBRATION === */}
             <div className="h-[100vh] w-full flex items-center justify-center p-4 relative">
-              <div className="glass-card p-4 md:p-10 rounded-3xl text-center max-w-2xl w-full relative z-10 flex flex-col items-center justify-center">
+              <div className="glass-card p-4 md:p-8 rounded-3xl text-center max-w-2xl w-full relative z-10 flex flex-col items-center justify-center max-h-[90vh] overflow-y-auto no-scrollbar">
 
-                {/* Decoration Icons */}
                 <div className="absolute -top-6 -left-6 text-yellow-400 animate-[spin_10s_linear_infinite]"><Stars size={50} fill="currentColor" /></div>
                 <div className="absolute -bottom-6 -right-6 text-pink-400 animate-bounce"><Heart size={50} fill="currentColor" /></div>
 
-                {/* Cake (Smaller to fit images) */}
-                <div className="flex justify-center mb-4 mt-2 transform hover:scale-105 transition-transform duration-500 scale-75 md:scale-90">
+                {/* Cake */}
+                <div className="flex justify-center mb-2 mt-2 transform hover:scale-105 transition-transform duration-500 scale-75 md:scale-90">
                   <div className="relative w-48 h-40">
                     <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-56 h-4 bg-white/50 rounded-full shadow-lg"></div>
                     <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-48 h-20 bg-rose-300 rounded-lg shadow-inner flex items-end justify-center overflow-hidden border-2 border-rose-400/30">
@@ -396,8 +660,9 @@
                   </div>
                 </div>
 
-                <h1 className="text-2xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500 mb-2 drop-shadow-sm">
-                  عيد ميلاد سعيد يا ندى
+                {/* TYPEWRITER TITLE */}
+                <h1 className="text-2xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500 mb-2 drop-shadow-sm min-h-[3rem]">
+                  {typedTitle}<span className={`${typedTitle.length < fullTitle.length ? 'typing-cursor' : 'hidden'}`}></span>
                 </h1>
 
                 <div className="flex items-center justify-center gap-2 text-pink-700/80 mb-4 font-bold text-sm md:text-base">
@@ -405,37 +670,28 @@
                   <span>3 / 1 / 2026</span>
                 </div>
 
-                {/* --- IMAGE GALLERY SECTION --- */}
-                <div className="flex justify-center gap-3 md:gap-6 mb-8 w-full max-w-lg mx-auto">
+                {/* IMAGE GALLERY */}
+                <div className="flex justify-center gap-3 md:gap-6 mb-4 w-full max-w-lg mx-auto">
                   {memories.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className={`relative group cursor-pointer transition-all duration-500 hover:z-20 hover:scale-125 hover:rotate-0
-                                   ${idx === 0 ? '-rotate-6' : idx === 1 ? 'rotate-3 translate-y-2' : '-rotate-3'}
-                                `}
-                    >
-                      <div className="p-1.5 md:p-2 bg-white rounded-md shadow-md hover:shadow-xl transition-shadow">
-                        <div className="w-20 h-20 md:w-28 md:h-28 overflow-hidden rounded-sm relative">
-                          <img src={img} alt={`Memory ${idx + 1}`} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-pink-500/0 group-hover:bg-pink-500/10 transition-colors"></div>
-                        </div>
+                    <div key={idx} onClick={(e) => { e.stopPropagation(); setSelectedImage(img); }}
+                      className={`relative group cursor-pointer transition-all duration-500 hover:z-20 hover:scale-110 ${idx === 0 ? '-rotate-6' : idx === 1 ? 'rotate-3 translate-y-2' : '-rotate-3'}`}>
+                      <div className="p-1.5 md:p-2 bg-white rounded-md shadow-md hover:shadow-xl transition-shadow relative">
+                        <div className="absolute -top-2 -right-2 bg-pink-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 shadow-sm"><ZoomIn size={12} /></div>
+                        <div className="w-20 h-20 md:w-28 md:h-28 overflow-hidden rounded-sm relative"><img src={img} alt={`Memory ${idx + 1}`} className="w-full h-full object-cover" /></div>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <p className="text-sm md:text-lg text-gray-700 font-medium leading-relaxed mb-6">
-                  كل سنة وأنتي طيبة، وكل سنة وأنتي الأجمل.
+                {/* TYPEWRITER MESSAGE */}
+                <p className="text-sm md:text-lg text-gray-700 font-medium leading-relaxed mb-6 min-h-[1.5em]">
+                  {typedMessage}<span className={`${typedTitle.length >= fullTitle.length && typedMessage.length < fullMessage.length ? 'typing-cursor' : 'hidden'}`}></span>
                 </p>
 
-                {/* Game Trigger Button */}
                 <div>
-                  <button
-                    onClick={() => setShowGame(true)}
-                    className="bg-white/60 hover:bg-white text-pink-600 px-6 py-3 rounded-xl shadow-lg border-2 border-pink-200 font-bold flex items-center gap-2 mx-auto transition-all transform hover:scale-105 active:scale-95 text-sm md:text-base"
-                  >
-                    <Key size={20} />
-                    يوجد رسالة سرية (اضغطي للفتح)
+                  <button onClick={(e) => { e.stopPropagation(); setShowGame(true); }}
+                    className="bg-white/60 hover:bg-white text-pink-600 px-6 py-3 rounded-xl shadow-lg border-2 border-pink-200 font-bold flex items-center gap-2 mx-auto transition-all transform hover:scale-105 active:scale-95 text-sm md:text-base">
+                    <Key size={20} /> يوجد رسالة سرية (اضغطي للفتح)
                   </button>
                 </div>
               </div>
@@ -443,142 +699,67 @@
 
           </div>
 
-          {/* --- OVERLAYS (Fixed on top of everything) --- */}
-
-          {/* Balloons - Fix: Combined animation and delay into one property */}
+          {/* --- OVERLAYS --- */}
           {isOpened && balloons.map((b) => (
             <div key={b.id} className={`absolute bottom-[-10vh] w-8 h-10 rounded-full opacity-80 z-20 ${b.color}`}
-              style={{
-                left: `${b.left}%`,
-                animation: `rise ${b.speed}s linear ${b.delay}s forwards`,
-                boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.1)'
-              }}>
+              style={{ left: `${b.left}%`, animation: `rise ${b.speed}s linear ${b.delay}s forwards`, boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.1)' }}>
               <div className="absolute bottom-[-10px] left-1/2 w-[1px] h-[10px] bg-gray-400"></div>
             </div>
           ))}
 
-          {/* Confetti - Fix: Combined animation and delay into one property */}
           {isOpened && confetti.map((c) => (
-            <div key={c.id} className="absolute w-3 h-3 rounded-sm z-20"
-              style={{
-                backgroundColor: c.color,
-                left: `${c.left}%`,
-                animation: `fall ${c.duration}s linear ${c.delay}s infinite`
-              }} />
+            <div key={c.id} className="absolute w-3 h-3 rounded-sm z-20" style={{ backgroundColor: c.color, left: `${c.left}%`, animation: `fall ${c.duration}s linear ${c.delay}s infinite` }} />
           ))}
+
+          {/* --- LIGHTBOX MODAL --- */}
+          {selectedImage && (
+            <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 animate-[lightboxEnter_0.6s_cubic-bezier(0.22,1,0.36,1)]" onClick={() => setSelectedImage(null)}>
+              <button className="absolute top-6 right-6 text-white hover:text-pink-400 transition-colors z-50" onClick={() => setSelectedImage(null)}><X size={32} /></button>
+              <div className="relative max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl p-1" onClick={(e) => e.stopPropagation()}>
+                <img src={selectedImage} alt="Memory Full" className="w-full h-full object-contain rounded-xl shadow-lg" />
+              </div>
+            </div>
+          )}
 
           {/* --- GAME MODAL --- */}
           {showGame && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-pink-900/40 backdrop-blur-sm animate-[popIn_0.3s_ease-out]">
-              <div className="glass-card bg-white/90 p-6 md:p-8 rounded-3xl w-full max-w-lg shadow-2xl relative">
-
-                <button onClick={() => setShowGame(false)} className="absolute top-4 right-4 text-pink-400 hover:text-pink-600 transition-colors">
-                  <X size={24} />
-                </button>
-
+              <div className="glass-card bg-white/90 p-6 md:p-8 rounded-3xl w-full max-w-lg shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
+                <button onClick={() => setShowGame(false)} className="absolute top-4 right-4 text-pink-400 hover:text-pink-600 transition-colors"><X size={24} /></button>
                 {!gameCompleted ? (
-                  /* RIDDLE STAGE */
                   <div className="text-center">
-                    <div className="flex justify-center mb-4">
-                      <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 shadow-inner">
-                        <Lock size={32} />
-                      </div>
-                    </div>
-
-                    <div className="mb-2 text-sm font-bold text-pink-400 tracking-wider">
-                      لغز {currentLevel + 1} من {riddles.length}
-                    </div>
-
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6 leading-relaxed">
-                      {riddles[currentLevel].question}
-                    </h2>
-
+                    <div className="flex justify-center mb-4"><div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 shadow-inner"><Lock size={32} /></div></div>
+                    <div className="mb-2 text-sm font-bold text-pink-400 tracking-wider">لغز {currentLevel + 1} من {riddles.length}</div>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6 leading-relaxed">{riddles[currentLevel].question}</h2>
                     <form onSubmit={handleAnswerSubmit} className="space-y-4">
-                      <input
-                        type="text"
-                        value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}
-                        placeholder="اكتبي الإجابة هنا..."
-                        className={`w-full p-4 rounded-xl text-center text-lg outline-none border-2 transition-all bg-white/50
-                                        ${error ? 'border-red-400 text-red-500 animate-shake bg-red-50' : 'border-pink-200 focus:border-pink-400 text-gray-700'}
-                                    `}
-                      />
-                      <button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white p-3 rounded-xl font-bold text-lg shadow-md hover:shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2"
-                      >
-                        تأكيد الإجابة <Send size={18} />
-                      </button>
+                      <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="اكتبي الإجابة هنا..."
+                        className={`w-full p-4 rounded-xl text-center text-lg outline-none border-2 transition-all bg-white/50 ${error ? 'border-red-400 text-red-500 animate-shake bg-red-50' : 'border-pink-200 focus:border-pink-400 text-gray-700'}`} />
+                      <button type="submit" className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white p-3 rounded-xl font-bold text-lg shadow-md hover:shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">تأكيد الإجابة <Send size={18} /></button>
                     </form>
-                    {error && <p className="text-red-500 text-sm mt-2 font-bold">الإجابة غير صحيحة، حاولي تاني!</p>}
+                    {error && <p className="text-red-500 text-sm mt-2 font-bold animate-shake">{error}</p>}
                   </div>
                 ) : (
-                  /* SUCCESS / SECRET MESSAGE STAGE */
                   <div className="text-center">
-                    <div className="flex justify-center mb-6">
-                      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 shadow-inner ring-4 ring-green-50 animate-[popIn_0.5s_backwards]">
-                        <Unlock size={40} />
-                      </div>
-                    </div>
-
-                    <h2 className="text-3xl font-extrabold text-pink-600 mb-4">
-                      مبروك! فتحتي الرسالة
-                    </h2>
-
+                    <div className="flex justify-center mb-6"><div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 shadow-inner ring-4 ring-green-50 animate-[popIn_0.5s_backwards]"><Unlock size={40} /></div></div>
+                    <h2 className="text-3xl font-extrabold text-pink-600 mb-4">مبروك! فتحتي الرسالة</h2>
                     <div className="bg-white/40 p-6 rounded-2xl border-2 border-pink-100 relative overflow-hidden text-right">
                       <div className="absolute top-0 right-0 p-2 opacity-10"><Heart size={100} /></div>
-
-                      <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">
-                        "كل سنة وانتي طيبة يا ندى.. أنتي مش بس شخص عادي، أنتي أجمل حاجة حصلت. أتمنى ليكي سنة كلها نجاح وفرحة زي قلبك الجميل."
-                      </p>
-
-                      {/* --- CUSTOM AUDIO PLAYER --- */}
+                      <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">"كل سنة وانتي طيبة يا ندى.. أنتي مش بس شخص عادي، أنتي أجمل حاجة حصلت. أتمنى ليكي سنة كلها نجاح وفرحة زي قلبك الجميل."</p>
                       <div className="relative z-10 bg-gradient-to-r from-pink-50 to-white p-4 rounded-xl border border-pink-200 shadow-sm flex items-center gap-4">
-
-                        <button
-                          onClick={toggleAudio}
-                          className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 transition-transform"
-                        >
-                          {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}
-                        </button>
-
+                        <button onClick={toggleAudio} className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 transition-transform">{isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}</button>
                         <div className="flex-1 flex flex-col justify-center gap-1">
-                          <div className="flex items-center gap-2 text-xs font-bold text-pink-400">
-                            <Mic size={12} />
-                            <span>تسجيل صوتي خاص</span>
-                          </div>
-
-                          <div className="flex items-center gap-1 h-6 w-full">
-                            {[...Array(20)].map((_, i) => (
-                              <div
-                                key={i}
-                                className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`}
-                                style={{
-                                  height: isPlaying ? undefined : '4px',
-                                  animationDelay: `${i * 0.05}s`
-                                }}
-                              ></div>
-                            ))}
-                          </div>
+                          <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>تسجيل صوتي خاص</span></div>
+                          <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
                         </div>
-
                         <audio ref={audioRef} src={recordUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
                       </div>
-
                     </div>
-
-                    <button
-                      onClick={() => { setShowGame(false); setIsOpened(true); }}
-                      className="mt-6 text-pink-500 hover:text-pink-700 font-bold underline"
-                    >
-                      العودة للاحتفال
-                    </button>
+                    <button onClick={() => { setShowGame(false); setIsOpened(true); }} className="mt-6 text-pink-500 hover:text-pink-700 font-bold underline">العودة للاحتفال</button>
                   </div>
                 )}
               </div>
             </div>
           )}
-
         </div>
       );
     };
