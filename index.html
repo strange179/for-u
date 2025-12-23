@@ -277,6 +277,11 @@
       const [error, setError] = useState(false);
       const [gameCompleted, setGameCompleted] = useState(false);
 
+      // --- SECRET PAGE STATE ---
+      const [showSecretPage, setShowSecretPage] = useState(false);
+      // Change this word to whatever you want the secret code to be
+      const secretWord = "سر";
+
       // Audio Player State
       const [isPlaying, setIsPlaying] = useState(false);
       const audioRef = useRef(null);
@@ -293,41 +298,78 @@
 
       // --- CONFIGURATION ---
       const recordUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+      const recordUrl2 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
       const targetDate = "2026-01-03T00:00:00";
 
       // *** Testing Mode: Set this to true to see the effect immediately, set to false for real date ***
-      const isTestingMode = false;
+      const isTestingMode = true;
 
-      const fullTitle = "عيد ميلاد سعيد يا ندى";
-      const fullMessage = "كل سنة وأنتي طيبة، وكل سنة وأنتي الأجمل.";
+      const fullTitle = "كل سنه وانت طيبه يا Meyoo";
+      const fullMessage = "كل سنه وانت ديما الاجمل , كل سنه وانت ديما ليا واقرب لحمنا ";
 
       const memories = [
-        "https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=400&q=80",
-        "https://images.unsplash.com/photo-1464349153912-d04643ee5036?auto=format&fit=crop&w=400&q=80"
+        "Sur/1.jpg",
+        "Sur/2.jpg",
+        "Sur/3.jpg"
       ];
 
       const riddles = [
         {
           id: 1,
-          question: "شيء لك، ولكن الناس يستخدمونه أكثر منك.. فما هو؟",
-          answers: ["اسمك", "الاسم", "إسمي", "اسمي"],
-          wrongMessage: "خطأ! حاول تفكر في حاجة بتنادي بيها على نفسك."
+          question: "بصي بقا اللعبه الي بدانها من عشر ايام هتحتجيها هنا : قولي فل عشان تكملي ",
+          answers: ["فل"],
+          wrongMessage: "مش عارفه تكتبي فل ؟؟؟ ده احنا لسه بنسمي "
         },
         {
           id: 2,
-          question: "كلما أخذت منه كبر.. فما هو؟",
-          answers: ["الحفرة", "حفرة", "الحفره"],
-          wrongMessage: "إجابة خاطئة. فكر في حاجة بنحفرها في الأرض."
+          question: "الرقم الي قولتلك احفظيه من الاستوري ",
+          answers: ["10051917"],
+          wrongMessage: "وااااو الجو مطر بس انتي حلوه الي فيه انت اجمل من القمر نفسه عشان مفيش زيك في الدنيا دي هي دي حقيقه فعلا بس ده كله حشو عشان اقولك ان كلمه السر هي هتلاقيها في سيرفر الديسكورد بتاعنا"
         },
         {
           id: 3,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماد بنستخدمه في المدرسة."
+          question: "اولا كده احنا هناكل طرب وهتاكلي معيا عادي",
+          answers: ["ماشي", "حاضر","عيوني"],
+          wrongMessage: "مينفش تقولي غير يا حاضر يا ماشي يا عيوني متفكريش 😂"
         },
         {
           id: 4,
+          question: "شيء يكتب ولا يقرأ.. فما هو؟",
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+        },
+        {
+          id: 5,
+          question: "شيء يكتب ولا يقرأ.. فما هو؟",
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+        },
+        {
+          id: 6,
+          question: "شيء يكتب ولا يقرأ.. فما هو؟",
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+        },
+        {
+          id: 7,
+          question: "شيء يكتب ولا يقرأ.. فما هو؟",
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+        },
+        {
+          id: 8,
+          question: "شيء يكتب ولا يقرأ.. فما هو؟",
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+        },
+        {
+          id: 9,
+          question: "شيء يكتب ولا يقرأ.. فما هو؟",
+          answers: ["القلم", "قلم"],
+          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+        },
+        {
+          id: 10,
           question: "شيء يكتب ولا يقرأ.. فما هو؟",
           answers: ["القلم", "قلم"],
           wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
@@ -462,6 +504,15 @@
 
       const handleAnswerSubmit = (e) => {
         e.preventDefault();
+
+        // Check for Secret Word on Question 2 (Index 1)
+        if (currentLevel === 1 && answer.trim() === secretWord) {
+          setShowSecretPage(true);
+          setAnswer('');
+          setError('');
+          return; // Stop normal flow
+        }
+
         const currentRiddle = riddles[currentLevel];
         if (currentRiddle.answers.some(a => a === answer.trim())) {
           setAnswer('');
@@ -587,7 +638,7 @@
                 </div>
 
                 <h1 className="text-3xl md:text-5xl font-extrabold text-pink-600 mb-4 tracking-wide">
-                  {showFireworks ? "حان وقت الاحتفال!" : "مفاجأة خاصة"}
+                  {showFireworks ? "من عبدو ل ندى" : "المفجأه بتاعتي"}
                 </h1>
 
                 {/* COUNTDOWN TIMER */}
@@ -614,7 +665,7 @@
                 </div>
 
                 <p className="text-pink-800 mb-8 text-lg font-medium">
-                  {showFireworks ? "أسرعي وافتحي هديتك الآن! 👇" : "هناك رسالة تنتظر أجمل شخص اليوم..."}
+                  {showFireworks ? "افتحي يلا 🎉 👇" : "الرساله دي عشانك ...."}
                 </p>
 
                 <button
@@ -623,7 +674,7 @@
                         ${showFireworks ? 'from-yellow-400 to-orange-500 hover:shadow-orange-500/50' : 'from-pink-500 to-rose-500 hover:shadow-pink-500/50'}`}
                 >
                   <span className="flex items-center gap-3">
-                    اضغطي هنا يا ندى
+                    دوسي هنا يا عسل
                     <Sparkles size={24} className="group-hover:animate-spin" />
                   </span>
                 </button>
@@ -661,7 +712,7 @@
                 </div>
 
                 {/* TYPEWRITER TITLE */}
-                <h1 className="text-2xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500 mb-2 drop-shadow-sm min-h-[3rem]">
+                <h1 className="text-2xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500 mb-2 pb-2 drop-shadow-sm min-h-[3rem] leading-relaxed">
                   {typedTitle}<span className={`${typedTitle.length < fullTitle.length ? 'typing-cursor' : 'hidden'}`}></span>
                 </h1>
 
@@ -691,7 +742,7 @@
                 <div>
                   <button onClick={(e) => { e.stopPropagation(); setShowGame(true); }}
                     className="bg-white/60 hover:bg-white text-pink-600 px-6 py-3 rounded-xl shadow-lg border-2 border-pink-200 font-bold flex items-center gap-2 mx-auto transition-all transform hover:scale-105 active:scale-95 text-sm md:text-base">
-                    <Key size={20} /> يوجد رسالة سرية (اضغطي للفتح)
+                    <Key size={20} /> عايز اقولك حاجه
                   </button>
                 </div>
               </div>
@@ -715,8 +766,8 @@
           {selectedImage && (
             <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 animate-[lightboxEnter_0.6s_cubic-bezier(0.22,1,0.36,1)]" onClick={() => setSelectedImage(null)}>
               <button className="absolute top-6 right-6 text-white hover:text-pink-400 transition-colors z-50" onClick={() => setSelectedImage(null)}><X size={32} /></button>
-              <div className="relative max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl p-1" onClick={(e) => e.stopPropagation()}>
-                <img src={selectedImage} alt="Memory Full" className="w-full h-full object-contain rounded-xl shadow-lg" />
+              <div className="relative w-auto h-auto max-w-[95vw] max-h-[95vh] rounded-2xl overflow-hidden shadow-2xl p-1 flex justify-center items-center" onClick={(e) => e.stopPropagation()}>
+                <img src={selectedImage} alt="Memory Full" className="max-w-full max-h-[90vh] w-auto h-auto object-contain rounded-xl shadow-lg" />
               </div>
             </div>
           )}
@@ -725,8 +776,27 @@
           {showGame && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-pink-900/40 backdrop-blur-sm animate-[popIn_0.3s_ease-out]">
               <div className="glass-card bg-white/90 p-6 md:p-8 rounded-3xl w-full max-w-lg shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
-                <button onClick={() => setShowGame(false)} className="absolute top-4 right-4 text-pink-400 hover:text-pink-600 transition-colors"><X size={24} /></button>
-                {!gameCompleted ? (
+                <button onClick={() => { setShowGame(false); setShowSecretPage(false); }} className="absolute top-4 right-4 text-pink-400 hover:text-pink-600 transition-colors"><X size={24} /></button>
+                {showSecretPage ? (
+                  <div className="text-center">
+                    <div className="flex justify-center mb-6"><div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 shadow-inner ring-4 ring-purple-50 animate-[popIn_0.5s_backwards]"><Stars size={40} /></div></div>
+                    <h2 className="text-3xl font-extrabold text-purple-600 mb-4">رسالة سرية خاصة!</h2>
+                    <div className="bg-white/40 p-6 rounded-2xl border-2 border-purple-100 relative overflow-hidden text-right">
+                      <div className="absolute top-0 right-0 p-2 opacity-10"><Sparkles size={100} /></div>
+                      <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">
+                        "أنتي عرفتي الكلمة السرية! دي رسالة خاصة عشانك بس. بحبك جداً ومبسوط إنك في حياتي."
+                      </p>
+                      <div className="relative z-10 bg-gradient-to-r from-pink-50 to-white p-4 rounded-xl border border-pink-200 shadow-sm flex items-center gap-4">
+                        <button onClick={toggleAudio} className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 transition-transform">{isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}</button>
+                        <div className="flex-1 flex flex-col justify-center gap-1">
+                          <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>تسجيل صوتي خاص</span></div>
+                          <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
+                        </div>
+                        <audio ref={audioRef} src={recordUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+                      </div>                    </div>
+                    <button onClick={() => { setShowGame(false); setShowSecretPage(false); setIsOpened(true); }} className="mt-6 text-purple-500 hover:text-purple-700 font-bold underline">العودة للاحتفال</button>
+                  </div>
+                ) : !gameCompleted ? (
                   <div className="text-center">
                     <div className="flex justify-center mb-4"><div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 shadow-inner"><Lock size={32} /></div></div>
                     <div className="mb-2 text-sm font-bold text-pink-400 tracking-wider">لغز {currentLevel + 1} من {riddles.length}</div>
@@ -734,7 +804,7 @@
                     <form onSubmit={handleAnswerSubmit} className="space-y-4">
                       <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="اكتبي الإجابة هنا..."
                         className={`w-full p-4 rounded-xl text-center text-lg outline-none border-2 transition-all bg-white/50 ${error ? 'border-red-400 text-red-500 animate-shake bg-red-50' : 'border-pink-200 focus:border-pink-400 text-gray-700'}`} />
-                      <button type="submit" className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white p-3 rounded-xl font-bold text-lg shadow-md hover:shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">تأكيد الإجابة <Send size={18} /></button>
+                      <button type="submit" className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white p-3 rounded-xl font-bold text-lg shadow-md hover:shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">تأكيد  <Send size={18} /></button>
                     </form>
                     {error && <p className="text-red-500 text-sm mt-2 font-bold animate-shake">{error}</p>}
                   </div>
@@ -744,11 +814,11 @@
                     <h2 className="text-3xl font-extrabold text-pink-600 mb-4">مبروك! فتحتي الرسالة</h2>
                     <div className="bg-white/40 p-6 rounded-2xl border-2 border-pink-100 relative overflow-hidden text-right">
                       <div className="absolute top-0 right-0 p-2 opacity-10"><Heart size={100} /></div>
-                      <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">"كل سنة وانتي طيبة يا ندى.. أنتي مش بس شخص عادي، أنتي أجمل حاجة حصلت. أتمنى ليكي سنة كلها نجاح وفرحة زي قلبك الجميل."</p>
+                      <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">"حبيبي شطوووووووووووووور............البسي بقا سمعات عشان تسمعي رساله تعتي"</p>
                       <div className="relative z-10 bg-gradient-to-r from-pink-50 to-white p-4 rounded-xl border border-pink-200 shadow-sm flex items-center gap-4">
                         <button onClick={toggleAudio} className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 transition-transform">{isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}</button>
                         <div className="flex-1 flex flex-col justify-center gap-1">
-                          <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>تسجيل صوتي خاص</span></div>
+                          <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>صوتي انا ده</span></div>
                           <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
                         </div>
                         <audio ref={audioRef} src={recordUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
