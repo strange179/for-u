@@ -325,37 +325,37 @@
         {
           id: 1,
           question: "بصي بقا اللعبه الي بدانها من عشر ايام هتحتجيها هنا عشان توصلي للرساله الي هتفتح في الاخر بعد ما تخلصي الاسالة دي : قولي فل عشان تكملي ",
-          answers: ["فل","بحبك"],
+          answers: ["فل", "بحبك"],
           wrongMessage: "مش عارفه تكتبي فل ؟؟؟ ده احنا لسه بنسمي "
         },
         {
           id: 2,
           question: "الرقم الي قولتلك احفظيه من الاستوري اول واحد خالص الطويل ده ",
-          answers: ["10051917","بحبك"],
+          answers: ["10051917", "بحبك"],
           wrongMessage: "وااااو الجو مطر بس انتي حلوه الي فيه انت اجمل من القمر نفسه عشان مفيش زيك في الدنيا دي هي دي حقيقه فعلا بس ده كله حشو عشان اقولك ان كلمه السر هي هتلاقيها في سيرفر الديسكورد بتاعنا"
         },
         {
           id: 3,
           question: "اولا كده احنا هناكل طرب وهتاكلي معيا عادي",
-          answers: ["ماشي", "حاضر", "عيوني","بحبك"],
+          answers: ["ماشي", "حاضر", "عيوني", "بحبك"],
           wrongMessage: "مينفش تقولي غير يا حاضر يا ماشي يا عيوني متفكريش 😂"
         },
         {
           id: 4,
           question: "انا هرخم عليكي دلوقتي : قولي فل علي اي سؤال جي ملوش اجابه معينه ",
-          answers: ["فل","بحبك"],
+          answers: ["فل", "بحبك"],
           wrongMessage: "ما تكتبي فل يا بنوته"
         },
         {
           id: 5,
           question: "ايه الرقم الي كنت خليتك تحسبيه ",
-          answers: ["632","بحبك"],
+          answers: ["632", "بحبك"],
           wrongMessage: "ركزي ده انا لسه مرخمتش "
         },
         {
           id: 6,
           question: "ايه بقا الرقم الي كان في الصوره نفسها",
-          answers: ["775","بحبك"],
+          answers: ["775", "بحبك"],
           wrongMessage: "مفيش هنتات اقعدي احسبيها بالعكس بقا لحد ما توصلي"
         },
         {
@@ -367,31 +367,31 @@
         {
           id: 8,
           question: "Everything",
-          answers: ["انا بالنسبالك ايه يا عبدو","بحبك"],
+          answers: ["انا بالنسبالك ايه يا عبدو", "بحبك"],
           wrongMessage: "اكتبي انت السؤال بقا الي كنت سالتيه سعتها"
         },
         {
           id: 9,
           question: "نرجع تاني بقا ايه مجموع التلت ارقام الي كانت في الصور التانيه الي كنت مصورها في الجامعه بليل",
-          answers: ["24","بحبك"],
+          answers: ["24", "بحبك"],
           wrongMessage: "ضحكت عليكي عايز مجموع الارقام الي كانت في اول صوره خالص "
         },
         {
           id: 10,
           question: "زهقتي من الاساله؟ ",
-          answers: ["لا","بحبك"],
+          answers: ["لا", "بحبك"],
           wrongMessage: " قولي لا عشان تعدي"
         },
         {
           id: 11,
           question: "لا بجد حاسسني رخمت عليكي ؟",
-          answers: ["لا انت جميل","بحبك"],
+          answers: ["لا انت جميل", "بحبك"],
           wrongMessage: "قولي لا انت جميل"
         },
         {
           id: 12,
           question: "خلاص خلاص ده اخر سؤال اسف",
-          answers: ["فل","بحبك"],
+          answers: ["فل", "بحبك"],
           wrongMessage: "قولتلك قولي فل لو مش لاقيه اجابه"
         },
         {
@@ -403,13 +403,13 @@
         {
           id: 14,
           question: "معلش خليها بحبك اوي ",
-          answers: ["بحبك اوي","بحبك"],
+          answers: ["بحبك اوي", "بحبك"],
           wrongMessage: "كده مش بتعرفي تكتبي عربي "
         },
         {
           id: 15,
           question: "خلاص خلاص 😂 قولي فل وهتعدي علطول المره دي",
-          answers: ["فل","بحبك"],
+          answers: ["فل", "بحبك"],
           wrongMessage: "انا بحبك"
         }
       ];
@@ -885,13 +885,13 @@
                 ) : !gameCompleted ? (
                   <div className="text-center">
                     <div className="flex justify-center mb-4"><div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 shadow-inner"><Lock size={32} /></div></div>
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6 leading-relaxed">{riddles[currentLevel].question}</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-2 leading-relaxed">{riddles[currentLevel].question}</h2>
+                    {error && <p className="text-red-500 text-sm mb-4 font-bold animate-shake">{error}</p>}
                     <form onSubmit={handleAnswerSubmit} className="space-y-4">
                       <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="اكتبي الإجابة هنا..."
                         className={`w-full p-4 rounded-xl text-center text-lg outline-none border-2 transition-all bg-white/50 ${error ? 'border-red-400 text-red-500 animate-shake bg-red-50' : 'border-pink-200 focus:border-pink-400 text-gray-700'}`} />
                       <button type="submit" className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white p-3 rounded-xl font-bold text-lg shadow-md hover:shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">تأكيد  <Send size={18} /></button>
                     </form>
-                    {error && <p className="text-red-500 text-sm mt-2 font-bold animate-shake">{error}</p>}
                   </div>
                 ) : (
                   <div className="text-center">
