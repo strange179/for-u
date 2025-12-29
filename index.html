@@ -264,6 +264,8 @@
     const Camera = (props) => <Icon {...props} path={<><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></>} />;
     const Clock = (props) => <Icon {...props} path={<><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></>} />;
     const ZoomIn = (props) => <Icon {...props} path={<><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /><line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" /></>} />;
+    const Volume2 = (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" /></>} />;
+    const VolumeX = (props) => <Icon {...props} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" /></>} />;
 
     const BirthdayApp = () => {
       const [isOpened, setIsOpened] = useState(false);
@@ -286,6 +288,10 @@
       const [isPlaying, setIsPlaying] = useState(false);
       const audioRef = useRef(null);
 
+      // --- BACKGROUND MUSIC STATE ---
+      const [isBgMusicMuted, setIsBgMusicMuted] = useState(false);
+      const bgMusicRef = useRef(null);
+
       // --- NEW STATES ---
       const [selectedImage, setSelectedImage] = useState(null);
       const [clickEffects, setClickEffects] = useState([]);
@@ -299,6 +305,7 @@
       // --- CONFIGURATION ---
       const recordUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
       const recordUrl2 = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+      const bgMusicUrl = "Sur/1.mp3";
       const targetDate = "2026-01-03T00:00:00";
 
       // *** Testing Mode: Set this to true to see the effect immediately, set to false for real date ***
@@ -318,73 +325,73 @@
         {
           id: 1,
           question: "بصي بقا اللعبه الي بدانها من عشر ايام هتحتجيها هنا عشان توصلي للرساله الي هتفتح في الاخر بعد ما تخلصي الاسالة دي : قولي فل عشان تكملي ",
-          answers: ["فل"],
+          answers: ["فل","بحبك"],
           wrongMessage: "مش عارفه تكتبي فل ؟؟؟ ده احنا لسه بنسمي "
         },
         {
           id: 2,
           question: "الرقم الي قولتلك احفظيه من الاستوري اول واحد خالص الطويل ده ",
-          answers: ["10051917"],
+          answers: ["10051917","بحبك"],
           wrongMessage: "وااااو الجو مطر بس انتي حلوه الي فيه انت اجمل من القمر نفسه عشان مفيش زيك في الدنيا دي هي دي حقيقه فعلا بس ده كله حشو عشان اقولك ان كلمه السر هي هتلاقيها في سيرفر الديسكورد بتاعنا"
         },
         {
           id: 3,
           question: "اولا كده احنا هناكل طرب وهتاكلي معيا عادي",
-          answers: ["ماشي", "حاضر","عيوني"],
+          answers: ["ماشي", "حاضر", "عيوني","بحبك"],
           wrongMessage: "مينفش تقولي غير يا حاضر يا ماشي يا عيوني متفكريش 😂"
         },
         {
           id: 4,
           question: "انا هرخم عليكي دلوقتي : قولي فل علي اي سؤال جي ملوش اجابه معينه ",
-          answers: ["فل"],
+          answers: ["فل","بحبك"],
           wrongMessage: "ما تكتبي فل يا بنوته"
         },
         {
           id: 5,
           question: "ايه الرقم الي كنت خليتك تحسبيه ",
-          answers: ["632"],
+          answers: ["632","بحبك"],
           wrongMessage: "ركزي ده انا لسه مرخمتش "
         },
         {
           id: 6,
           question: "ايه بقا الرقم الي كان في الصوره نفسها",
-          answers: ["775"],
-          wrongMessage:"مفيش هنتات اقعدي احسبيها بالعكس بقا لحد ما توصلي"
+          answers: ["775","بحبك"],
+          wrongMessage: "مفيش هنتات اقعدي احسبيها بالعكس بقا لحد ما توصلي"
         },
         {
           id: 7,
           question: "بتحبيني ؟",
-          answers: ["اه ","اكيد","بحبك","ايوه","بحبك اوي"],
+          answers: ["اه ", "اكيد", "بحبك", "ايوه", "بحبك اوي"],
           wrongMessage: "انا حطتلك كل الاحتمالت المفروض الرساله دي لو ظهرت يعني انت كتبتي ايه ؟؟؟؟؟"
         },
         {
           id: 8,
           question: "Everything",
-          answers: ["انا بالنسبالك ايه يا عبدو"],
+          answers: ["انا بالنسبالك ايه يا عبدو","بحبك"],
           wrongMessage: "اكتبي انت السؤال بقا الي كنت سالتيه سعتها"
         },
         {
           id: 9,
           question: "نرجع تاني بقا ايه مجموع التلت ارقام الي كانت في الصور التانيه الي كنت مصورها في الجامعه بليل",
-          answers: ["24"],
+          answers: ["24","بحبك"],
           wrongMessage: "ضحكت عليكي عايز مجموع الارقام الي كانت في اول صوره خالص "
         },
         {
           id: 10,
           question: "زهقتي من الاساله؟ ",
-          answers: ["لا"],
+          answers: ["لا","بحبك"],
           wrongMessage: " قولي لا عشان تعدي"
         },
         {
           id: 11,
           question: "لا بجد حاسسني رخمت عليكي ؟",
-          answers: ["لا انت جميل"],
+          answers: ["لا انت جميل","بحبك"],
           wrongMessage: "قولي لا انت جميل"
         },
         {
           id: 12,
           question: "خلاص خلاص ده اخر سؤال اسف",
-          answers: ["فل"],
+          answers: ["فل","بحبك"],
           wrongMessage: "قولتلك قولي فل لو مش لاقيه اجابه"
         },
         {
@@ -396,20 +403,51 @@
         {
           id: 14,
           question: "معلش خليها بحبك اوي ",
-          answers: ["بحبك اوي"],
+          answers: ["بحبك اوي","بحبك"],
           wrongMessage: "كده مش بتعرفي تكتبي عربي "
         },
         {
           id: 15,
           question: "خلاص خلاص 😂 قولي فل وهتعدي علطول المره دي",
-          answers: ["فل"],
+          answers: ["فل","بحبك"],
           wrongMessage: "انا بحبك"
         }
       ];
 
+      // --- BACKGROUND MUSIC LOGIC ---
+      useEffect(() => {
+        if (bgMusicRef.current) {
+          bgMusicRef.current.volume = 0.4;
+          // Attempt autoplay
+          const playPromise = bgMusicRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log("Auto-play was prevented. Interactive play required.", error);
+            });
+          }
+        }
+      }, []);
+
+      const toggleBgMusic = (e) => {
+        e.stopPropagation(); // Prevent global click effects
+        if (bgMusicRef.current) {
+          if (isBgMusicMuted) {
+            bgMusicRef.current.muted = false;
+          } else {
+            bgMusicRef.current.muted = true;
+          }
+          setIsBgMusicMuted(!isBgMusicMuted);
+        }
+      };
+
       // --- FEATURE IMPLEMENTATIONS ---
 
       const handleGlobalClick = (e) => {
+        // Fallback: Try to play music on any interaction if it's paused (autoplay blocked)
+        if (bgMusicRef.current && bgMusicRef.current.paused) {
+          bgMusicRef.current.play().catch(() => { });
+        }
+
         if (e.target.closest('button') || e.target.closest('input')) return;
 
         const newEffect = {
@@ -605,6 +643,17 @@
           dir="rtl"
           onClick={handleGlobalClick}
         >
+          {/* --- BACKGROUND MUSIC ELEMENT --- */}
+          <audio ref={bgMusicRef} src={bgMusicUrl} loop />
+
+          {/* --- MUTE BUTTON (Top Left) --- */}
+          <button
+            onClick={toggleBgMusic}
+            className="absolute top-4 left-4 z-[100] p-3 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md border border-white/50 text-pink-600 shadow-lg transition-all transform hover:scale-110"
+            title={isBgMusicMuted ? "شغل الموسيقى" : "اكتم الموسيقى"}
+          >
+            {isBgMusicMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+          </button>
 
 
           {/* --- CLICK EFFECTS RENDERING --- */}
@@ -700,7 +749,13 @@
                 </p>
 
                 <button
-                  onClick={(e) => { e.stopPropagation(); setIsOpened(true); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsOpened(true);
+                    if (bgMusicRef.current && bgMusicRef.current.paused) {
+                      bgMusicRef.current.play().catch(() => { });
+                    }
+                  }}
                   className={`group relative px-8 py-4 rounded-full bg-gradient-to-r text-white font-bold text-xl shadow-lg transition-all active:scale-95 animate-[pulse-glow_2s_infinite]
                         ${showFireworks ? 'from-yellow-400 to-orange-500 hover:shadow-orange-500/50' : 'from-pink-500 to-rose-500 hover:shadow-pink-500/50'}`}
                 >
@@ -844,7 +899,7 @@
                     <h2 className="text-3xl font-extrabold text-pink-600 mb-4">مبروك! فتحتي الرسالة</h2>
                     <div className="bg-white/40 p-6 rounded-2xl border-2 border-pink-100 relative overflow-hidden text-right">
                       <div className="absolute top-0 right-0 p-2 opacity-10"><Heart size={100} /></div>
-                      <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">"حبيبي شطوووووووووووووور............البسي بقا سمعات عشان تسمعي رساله تعتي"</p>
+                      <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">" حبيبي شطوووووووووووووور............البسي بقا سمعات عشان تسمعي رساله تعتي متنسيش تعملي ميوت لصوت الاغنيه من فوق علي الشمال"</p>
                       <div className="relative z-10 bg-gradient-to-r from-pink-50 to-white p-4 rounded-xl border border-pink-200 shadow-sm flex items-center gap-4">
                         <button onClick={toggleAudio} className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 transition-transform">{isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}</button>
                         <div className="flex-1 flex flex-col justify-center gap-1">
