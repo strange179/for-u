@@ -280,7 +280,7 @@
       // --- SECRET PAGE STATE ---
       const [showSecretPage, setShowSecretPage] = useState(false);
       // Change this word to whatever you want the secret code to be
-      const secretWord = "سر";
+      const secretWord = "وزه وقطة";
 
       // Audio Player State
       const [isPlaying, setIsPlaying] = useState(false);
@@ -302,7 +302,7 @@
       const targetDate = "2026-01-03T00:00:00";
 
       // *** Testing Mode: Set this to true to see the effect immediately, set to false for real date ***
-      const isTestingMode = true;
+      const isTestingMode = false;
 
       const fullTitle = "كل سنه وانت طيبه يا Meyoo";
       const fullMessage = "كل سنه وانت ديما الاجمل , كل سنه وانت ديما ليا واقرب لحمنا ";
@@ -317,13 +317,13 @@
       const riddles = [
         {
           id: 1,
-          question: "بصي بقا اللعبه الي بدانها من عشر ايام هتحتجيها هنا : قولي فل عشان تكملي ",
+          question: "بصي بقا اللعبه الي بدانها من عشر ايام هتحتجيها هنا عشان توصلي للرساله الي هتفتح في الاخر بعد ما تخلصي الاسالة دي : قولي فل عشان تكملي ",
           answers: ["فل"],
           wrongMessage: "مش عارفه تكتبي فل ؟؟؟ ده احنا لسه بنسمي "
         },
         {
           id: 2,
-          question: "الرقم الي قولتلك احفظيه من الاستوري ",
+          question: "الرقم الي قولتلك احفظيه من الاستوري اول واحد خالص الطويل ده ",
           answers: ["10051917"],
           wrongMessage: "وااااو الجو مطر بس انتي حلوه الي فيه انت اجمل من القمر نفسه عشان مفيش زيك في الدنيا دي هي دي حقيقه فعلا بس ده كله حشو عشان اقولك ان كلمه السر هي هتلاقيها في سيرفر الديسكورد بتاعنا"
         },
@@ -335,45 +335,75 @@
         },
         {
           id: 4,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+          question: "انا هرخم عليكي دلوقتي : قولي فل علي اي سؤال جي ملوش اجابه معينه ",
+          answers: ["فل"],
+          wrongMessage: "ما تكتبي فل يا بنوته"
         },
         {
           id: 5,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+          question: "ايه الرقم الي كنت خليتك تحسبيه ",
+          answers: ["632"],
+          wrongMessage: "ركزي ده انا لسه مرخمتش "
         },
         {
           id: 6,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+          question: "ايه بقا الرقم الي كان في الصوره نفسها",
+          answers: ["775"],
+          wrongMessage:"مفيش هنتات اقعدي احسبيها بالعكس بقا لحد ما توصلي"
         },
         {
           id: 7,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+          question: "بتحبيني ؟",
+          answers: ["اه ","اكيد","بحبك","ايوه","بحبك اوي"],
+          wrongMessage: "انا حطتلك كل الاحتمالت المفروض الرساله دي لو ظهرت يعني انت كتبتي ايه ؟؟؟؟؟"
         },
         {
           id: 8,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+          question: "Everything",
+          answers: ["انا بالنسبالك ايه يا عبدو"],
+          wrongMessage: "اكتبي انت السؤال بقا الي كنت سالتيه سعتها"
         },
         {
           id: 9,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+          question: "نرجع تاني بقا ايه مجموع التلت ارقام الي كانت في الصور التانيه الي كنت مصورها في الجامعه بليل",
+          answers: ["24"],
+          wrongMessage: "ضحكت عليكي عايز مجموع الارقام الي كانت في اول صوره خالص "
         },
         {
           id: 10,
-          question: "شيء يكتب ولا يقرأ.. فما هو؟",
-          answers: ["القلم", "قلم"],
-          wrongMessage: "لا مش صح. هو جماf'g uf'ه في المدرسة."
+          question: "زهقتي من الاساله؟ ",
+          answers: ["لا"],
+          wrongMessage: " قولي لا عشان تعدي"
+        },
+        {
+          id: 11,
+          question: "لا بجد حاسسني رخمت عليكي ؟",
+          answers: ["لا انت جميل"],
+          wrongMessage: "قولي لا انت جميل"
+        },
+        {
+          id: 12,
+          question: "خلاص خلاص ده اخر سؤال اسف",
+          answers: ["فل"],
+          wrongMessage: "قولتلك قولي فل لو مش لاقيه اجابه"
+        },
+        {
+          id: 13,
+          question: "جاست قولي بحبك وبس كده",
+          answers: ["بحبك"],
+          wrongMessage: "دي ميتغلطش فيها دي"
+        },
+        {
+          id: 14,
+          question: "معلش خليها بحبك اوي ",
+          answers: ["بحبك اوي"],
+          wrongMessage: "كده مش بتعرفي تكتبي عربي "
+        },
+        {
+          id: 15,
+          question: "خلاص خلاص 😂 قولي فل وهتعدي علطول المره دي",
+          answers: ["فل"],
+          wrongMessage: "انا بحبك"
         }
       ];
 
@@ -781,26 +811,25 @@
                 {showSecretPage ? (
                   <div className="text-center">
                     <div className="flex justify-center mb-6"><div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 shadow-inner ring-4 ring-purple-50 animate-[popIn_0.5s_backwards]"><Stars size={40} /></div></div>
-                    <h2 className="text-3xl font-extrabold text-purple-600 mb-4">رسالة سرية خاصة!</h2>
+                    <h2 className="text-3xl font-extrabold text-purple-600 mb-4">شطووووووووووووووره</h2>
                     <div className="bg-white/40 p-6 rounded-2xl border-2 border-purple-100 relative overflow-hidden text-right">
                       <div className="absolute top-0 right-0 p-2 opacity-10"><Sparkles size={100} /></div>
                       <p className="text-lg text-gray-800 leading-loose font-medium relative z-10 mb-6">
-                        "أنتي عرفتي الكلمة السرية! دي رسالة خاصة عشانك بس. بحبك جداً ومبسوط إنك في حياتي."
+                        "هنا بقا الرساله الحقيقه حبيت العب معاكي شويه وفرفشك ويكون هذا يوم مختلف مش زي اي مره قولتك فيها كل سنه وانت طيبه من غير ما اقولك ..........انا بحبك"
                       </p>
                       <div className="relative z-10 bg-gradient-to-r from-pink-50 to-white p-4 rounded-xl border border-pink-200 shadow-sm flex items-center gap-4">
                         <button onClick={toggleAudio} className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white shadow-md hover:scale-105 transition-transform">{isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}</button>
                         <div className="flex-1 flex flex-col justify-center gap-1">
-                          <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>تسجيل صوتي خاص</span></div>
+                          <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>صوتي ده برده</span></div>
                           <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
                         </div>
-                        <audio ref={audioRef} src={recordUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+                        <audio ref={audioRef} src={recordUrl2} onEnded={() => setIsPlaying(false)} className="hidden" />
                       </div>                    </div>
                     <button onClick={() => { setShowGame(false); setShowSecretPage(false); setIsOpened(true); }} className="mt-6 text-purple-500 hover:text-purple-700 font-bold underline">العودة للاحتفال</button>
                   </div>
                 ) : !gameCompleted ? (
                   <div className="text-center">
                     <div className="flex justify-center mb-4"><div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 shadow-inner"><Lock size={32} /></div></div>
-                    <div className="mb-2 text-sm font-bold text-pink-400 tracking-wider">لغز {currentLevel + 1} من {riddles.length}</div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 leading-relaxed">{riddles[currentLevel].question}</h2>
                     <form onSubmit={handleAnswerSubmit} className="space-y-4">
                       <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} placeholder="اكتبي الإجابة هنا..."
