@@ -656,7 +656,7 @@
           onClick={handleGlobalClick}
         >
           {/* --- BACKGROUND MUSIC ELEMENT --- */}
-          <audio ref={bgMusicRef} src={bgMusicUrl} loop />
+          <audio ref={bgMusicRef} src={recordUrl} loop />
           <audio ref={normalAudioRef} src={recordUrl} className="hidden" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={() => setIsPlaying(false)} />
           <audio ref={secretAudioRef} src={recordUrl2} className="hidden" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={() => setIsPlaying(false)} />
 
