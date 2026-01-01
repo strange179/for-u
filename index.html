@@ -286,7 +286,8 @@
 
       // Audio Player State
       const [isPlaying, setIsPlaying] = useState(false);
-      const audioRef = useRef(null);
+      const normalAudioRef = useRef(null);
+      const secretAudioRef = useRef(null);
 
       // --- BACKGROUND MUSIC STATE ---
       const [isBgMusicMuted, setIsBgMusicMuted] = useState(false);
@@ -304,7 +305,7 @@
 
       // --- CONFIGURATION ---
       const recordUrl = "Sur/2.m4a";
-      const recordUrl2 = "https://drive.google.com/file/d/1_DroKbBPEuTES84AuSEbsV-N06JQpjOJ/view?usp=sharing";
+      const recordUrl2 = "Sur/3.mp3";
       const bgMusicUrl = "Sur/1.mp3";
       const targetDate = "2026-01-03T00:00:00";
 
@@ -579,6 +580,11 @@
           setShowSecretPage(true);
           setAnswer('');
           setError('');
+
+          // Trigger Secret Audio (REMOVED)
+          // if (secretAudioRef.current) { ... }
+
+          if (bgMusicRef.current) bgMusicRef.current.muted = true;
           return; // Stop normal flow
         }
 
@@ -590,6 +596,10 @@
             setCurrentLevel(prev => prev + 1);
           } else {
             setGameCompleted(true);
+            // Trigger Normal Audio (REMOVED)
+            // if (normalAudioRef.current) { ... }
+
+            if (bgMusicRef.current) bgMusicRef.current.muted = true;
           }
         } else {
           setError(currentRiddle.wrongMessage || "الإجابة غير صحيحة، حاولي تاني!");
@@ -598,20 +608,22 @@
       };
 
       const toggleAudio = () => {
-        if (audioRef.current) {
+        const targetRef = showSecretPage ? secretAudioRef : normalAudioRef;
+        if (targetRef.current) {
           if (isPlaying) {
-            audioRef.current.pause();
+            targetRef.current.pause();
           } else {
-            audioRef.current.play();
+            targetRef.current.play().catch(e => console.error("Playback failed", e));
           }
-          setIsPlaying(!isPlaying);
         }
       };
 
       useEffect(() => {
-        if (!showGame && isPlaying && audioRef.current) {
-          audioRef.current.pause();
-          setIsPlaying(false);
+        if (!showGame) {
+          // Stop all audio when closing
+          if (normalAudioRef.current) { normalAudioRef.current.pause(); setIsPlaying(false); }
+          if (secretAudioRef.current) { secretAudioRef.current.pause(); setIsPlaying(false); }
+          if (bgMusicRef.current) bgMusicRef.current.muted = isBgMusicMuted;
         }
       }, [showGame]);
 
@@ -645,6 +657,8 @@
         >
           {/* --- BACKGROUND MUSIC ELEMENT --- */}
           <audio ref={bgMusicRef} src={bgMusicUrl} loop />
+          <audio ref={normalAudioRef} src={recordUrl} className="hidden" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={() => setIsPlaying(false)} />
+          <audio ref={secretAudioRef} src={recordUrl2} className="hidden" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onEnded={() => setIsPlaying(false)} />
 
           {/* --- MUTE BUTTON (Top Left) --- */}
           <button
@@ -878,7 +892,7 @@
                           <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>صوتي ده برده</span></div>
                           <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
                         </div>
-                        <audio ref={audioRef} src={recordUrl2} onEnded={() => setIsPlaying(false)} className="hidden" />
+
                       </div>                    </div>
                     <button onClick={() => { setShowGame(false); setShowSecretPage(false); setIsOpened(true); }} className="mt-6 text-purple-500 hover:text-purple-700 font-bold underline">العودة للاحتفال</button>
                   </div>
@@ -906,7 +920,7 @@
                           <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>صوتي انا ده</span></div>
                           <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
                         </div>
-                        <audio ref={audioRef} src={recordUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+
                       </div>
                     </div>
                     <button onClick={() => { setShowGame(false); setIsOpened(true); }} className="mt-6 text-pink-500 hover:text-pink-700 font-bold underline">ارجعي تاني</button>
