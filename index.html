@@ -602,16 +602,15 @@
           if (isPlaying) {
             audioRef.current.pause();
           } else {
-            audioRef.current.play();
+            audioRef.current.play().catch(e => console.error("Playback failed", e));
           }
-          setIsPlaying(!isPlaying);
         }
       };
 
       useEffect(() => {
         if (!showGame && isPlaying && audioRef.current) {
           audioRef.current.pause();
-          setIsPlaying(false);
+          // State will update via onPause
         }
       }, [showGame]);
 
@@ -878,7 +877,15 @@
                           <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>صوتي ده برده</span></div>
                           <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
                         </div>
-                        <audio ref={audioRef} src={recordUrl2} onEnded={() => setIsPlaying(false)} className="hidden" />
+                        <audio
+                          ref={audioRef}
+                          src={recordUrl2}
+                          className="hidden"
+                          autoPlay
+                          onPlay={() => setIsPlaying(true)}
+                          onPause={() => setIsPlaying(false)}
+                          onEnded={() => setIsPlaying(false)}
+                        />
                       </div>                    </div>
                     <button onClick={() => { setShowGame(false); setShowSecretPage(false); setIsOpened(true); }} className="mt-6 text-purple-500 hover:text-purple-700 font-bold underline">العودة للاحتفال</button>
                   </div>
@@ -906,7 +913,15 @@
                           <div className="flex items-center gap-2 text-xs font-bold text-pink-400"><Mic size={12} /><span>صوتي انا ده</span></div>
                           <div className="flex items-center gap-1 h-6 w-full">{[...Array(20)].map((_, i) => (<div key={i} className={`w-1 bg-pink-300 rounded-full transition-all duration-300 ${isPlaying ? 'animate-wave' : 'h-1'}`} style={{ height: isPlaying ? undefined : '4px', animationDelay: `${i * 0.05}s` }}></div>))}</div>
                         </div>
-                        <audio ref={audioRef} src={recordUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+                        <audio
+                          ref={audioRef}
+                          src={recordUrl}
+                          className="hidden"
+                          autoPlay
+                          onPlay={() => setIsPlaying(true)}
+                          onPause={() => setIsPlaying(false)}
+                          onEnded={() => setIsPlaying(false)}
+                        />
                       </div>
                     </div>
                     <button onClick={() => { setShowGame(false); setIsOpened(true); }} className="mt-6 text-pink-500 hover:text-pink-700 font-bold underline">ارجعي تاني</button>
